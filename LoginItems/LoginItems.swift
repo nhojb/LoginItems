@@ -41,46 +41,47 @@ public class LoginItemsManager : NSObject {
     }
 
     private var loginItemsReference: LSSharedFileList? {
-        return LSSharedFileListCreate(
-            nil,
-            kLSSharedFileListSessionLoginItems.takeRetainedValue(),
-            nil
-            ).takeRetainedValue() as LSSharedFileList?
+        return LSSharedFileListCreate(nil,
+                                      kLSSharedFileListSessionLoginItems.takeRetainedValue(),
+                                      nil).takeRetainedValue() as LSSharedFileList?
     }
 
     private func makeLoginItem(_ shouldBeLoginItem: Bool) {
+        guard let loginItemsRef = loginItemsReference else {
+            return
+        }
+
         let itemReferences = itemReferencesInLoginItems()
-        if let loginItemsRef = loginItemsReference {
-            if shouldBeLoginItem {
-                let bundleURL = Bundle.main.bundleURL as NSURL
-                LSSharedFileListInsertItemURL(loginItemsRef, itemReferences.lastItemReference, nil, nil, bundleURL, nil, nil)
-            }
-            else if let itemReference = itemReferences.thisReference {
-                LSSharedFileListItemRemove(loginItemsRef, itemReference)
-            }
+
+        if shouldBeLoginItem {
+            let bundleURL = Bundle.main.bundleURL as NSURL
+            LSSharedFileListInsertItemURL(loginItemsRef, itemReferences.lastItemReference, nil, nil, bundleURL, nil, nil)
+        }
+        else if let itemReference = itemReferences.thisReference {
+            LSSharedFileListItemRemove(loginItemsRef, itemReference)
         }
     }
 
     private func itemReferencesInLoginItems() -> (thisReference: LSSharedFileListItem?, lastItemReference: LSSharedFileListItem?) {
-        let bundleURL = Bundle.main.bundleURL as NSURL
-        if let loginItemsRef = loginItemsReference {
-            let loginItems = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
-            if loginItems.count > 0 {
-                let lastItemReference = loginItems.lastObject as! LSSharedFileListItem
-
-                for currentItemReference in loginItems as! [LSSharedFileListItem] {
-                    let itemURL = LSSharedFileListItemCopyResolvedURL(currentItemReference, 0, nil)
-                    if itemURL != nil && bundleURL.isEqual(itemURL?.takeRetainedValue()) {
-                        return (currentItemReference, lastItemReference)
-                    }
-                }
-                return (nil, lastItemReference)
-            }
-            else {
-                return (nil, kLSSharedFileListItemBeforeFirst.takeRetainedValue())
-            }
+        guard let loginItemsRef = loginItemsReference else {
+            return (nil, nil)
         }
-        return (nil, nil)
-    }
 
+        let loginItems = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
+        if loginItems.count > 0 {
+            let bundleURL = Bundle.main.bundleURL as NSURL
+            let lastItemReference = loginItems.lastObject as! LSSharedFileListItem
+
+            for currentItemReference in loginItems as! [LSSharedFileListItem] {
+                let itemURL = LSSharedFileListItemCopyResolvedURL(currentItemReference, 0, nil)
+                if itemURL != nil && bundleURL.isEqual(itemURL?.takeRetainedValue()) {
+                    return (currentItemReference, lastItemReference)
+                }
+            }
+            return (nil, lastItemReference)
+        }
+        else {
+            return (nil, kLSSharedFileListItemBeforeFirst.takeRetainedValue())
+        }
+    }
 }
