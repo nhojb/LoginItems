@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		52B9CC021DE46709007FDA04 /* LoginItems.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B9CC001DE46709007FDA04 /* LoginItems.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52B9CC091DE46784007FDA04 /* LoginItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9CC081DE46784007FDA04 /* LoginItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		52B9CBFD1DE46709007FDA04 /* LoginItems.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LoginItems.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B9CC001DE46709007FDA04 /* LoginItems.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginItems.h; sourceTree = "<group>"; };
 		52B9CC011DE46709007FDA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52B9CC081DE46784007FDA04 /* LoginItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +48,9 @@
 		52B9CBFF1DE46709007FDA04 /* LoginItems */ = {
 			isa = PBXGroup;
 			children = (
-				52B9CC001DE46709007FDA04 /* LoginItems.h */,
 				52B9CC011DE46709007FDA04 /* Info.plist */,
+				52B9CC001DE46709007FDA04 /* LoginItems.h */,
+				52B9CC081DE46784007FDA04 /* LoginItems.swift */,
 			);
 			path = LoginItems;
 			sourceTree = "<group>";
@@ -96,6 +99,7 @@
 					52B9CBFC1DE46709007FDA04 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = MS8TKNV8QW;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B9CC091DE46784007FDA04 /* LoginItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +242,7 @@
 		52B9CC061DE46709007FDA04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -251,13 +257,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.olivetoast.LoginItems;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		52B9CC071DE46709007FDA04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -272,7 +280,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.olivetoast.LoginItems;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
