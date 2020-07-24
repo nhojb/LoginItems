@@ -31,6 +31,7 @@ public class LoginItemsManager : NSObject {
 
     public static var shared = LoginItemsManager()
 
+    @objc
     public var startAtLogin: Bool {
         get {
             return itemReferencesInLoginItems().thisReference != nil
