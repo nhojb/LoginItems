@@ -5,7 +5,7 @@ A mini framework written in Swift to provide access to the LaunchServices login 
 ### Usage:
 
     // Add your app to the users list of Login Items
-    LaunchItemsManager.shared.startAtLogin = true
+    LoginItemsManager.shared.startAtLogin = true
 
 Alternatively add a LaunchItemsManager object to your xib file and then bind a checkbox to
 "Launch Items Manager" using the model key path "self.startAtLogin".
